@@ -1,0 +1,23 @@
+# Create wifi-resume.service script at the below path
+# sudo vi /etc/systemd/system/wifi-resume.service
+# Save and close the script and then run the below command
+# sudo systemctl enable wifi-resume.service
+# Now you can get your system to sleep mood and turn back again without miss
+# the wifi connection
+# auther : Amr Elsayed, amr.elsayed.dk@gmail.com
+# year   : 2017
+
+[Unit]
+Description=Restart networkmanager at resume
+After=suspend.target
+After=hibernate.target
+After=hybrid-sleep.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/systemctl restart network-manager.service
+
+[Install]
+WantedBy=suspend.target
+WantedBy=hibernate.target
+WantedBy=hybrid-sleep.target
